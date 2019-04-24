@@ -4,12 +4,12 @@ class DateTimeUtil {
     }
 
     setYear(date, year) {
-        return date.setYear(year);
+        date.setFullYear(year)
+        return date;
     }
 
-
-    daysDifference(dateLeft, dateRight){
-        return Math.round(dateRight.getDate() - dateLeft.getDate()/(1000*60*60*24));
+    daysDifference(dateLeft, dateRight) {
+        return Math.round((dateRight.getTime() - dateLeft.getTime()) / (1000 * 60 * 60 * 24));
     }
 }
 
