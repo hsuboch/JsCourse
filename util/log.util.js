@@ -1,13 +1,13 @@
-class Log{
-    info(text){
+class Log {
+    info(text) {
         console.log(`[INFO] ${text} [INFO]`)
     }
-    
-    warning(text){
+
+    warning(text) {
         console.log(`[WARNING] ${text} [WARNING]`)
     }
-    
-    error(text){
+
+    error(text) {
         console.log(`[ERROR] ${text} [ERROR]`)
     }
 }
