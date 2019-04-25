@@ -1,0 +1,23 @@
+{
+  "name": "jscourse",
+  "version": "1.0.0",
+  "description": "Project for js course",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hsuboch/JsCourse.git"
+  },
+  "author": "hsuboch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hsuboch/JsCourse/issues"
+  },
+  "homepage": "https://github.com/hsuboch/JsCourse#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
+  }
+}
