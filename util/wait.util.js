@@ -10,30 +10,29 @@ const doWait = (action, interval, expectedValue) => {
     })
 }
 
+const retrier = (action, maxCount, interval, expectedValue, count = 0) => {
+    count++;
+    logger.info(`[${count}] Wait for ${expectedValue}`);
+    return doWait(action, interval, expectedValue).then(() => {
+        logger.warning('Reached expected condition');
+        return true;
+    }, reject => {
+        if (maxCount <= count) {
+            logger.warning(`Did not get expected result. Actual result is ${reject}`);
+            return false;
+        } else {
+            return retrier(action, maxCount, interval, expectedValue, count);
+        }
+    })
+}
+
 class Wait {
-
-    forBoolCondition(action, maxCount, interval, expectedValue, count = 0) {
-        count++;
-        logger.info(`[${count}] Wait for ${expectedValue}`);
-        return doWait(action, interval, expectedValue).then(() => {
-            logger.warning('Reached expected condition');
-            return true;
-        }, reject => {
-            if (maxCount <= count) {
-                logger.warning(`Did not get expected result. Actual result is ${reject}`);
-                return false;
-            } else {
-                return this.forBoolCondition(action, maxCount, interval, expectedValue, count);
-            }
-        })
-    }
-
     forTrue(action, maxCount, interval) {
-        return this.forBoolCondition(action, maxCount, interval, true);
+        return retrier(action, maxCount, interval, true);
     }
 
     forFalse(action, maxCount, interval) {
-        return this.forBoolCondition(action, maxCount, interval, false);
+        return retrier(action, maxCount, interval, false);
     }
 }
 
