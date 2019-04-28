@@ -1,28 +1,40 @@
 const logger = require('./log.util')
 
-const doWait = (action, interval) => {
+const doWait = (action, interval, expectedValue) => {
     return new Promise((resolve, reject) => {
-        if(action()){
-            setTimeout(()=> resolve(), interval);
+        var actualValue = action();
+        if (actualValue == expectedValue) {
+            setTimeout(() => resolve(), interval);
         }
-        setTimeout(() => reject(), interval);
+        setTimeout(() => reject(actualValue), interval);
     })
 }
+
 class Wait {
-    forTrue(action, maxCount, interval, count = 0) {
+
+    forBoolCondition(action, maxCount, interval, expectedValue, count = 0) {
         count++;
-        logger.info(`[${count}] Wait for true`)
-        return doWait(action, interval).then(() => {
-            logger.warning('Reached expected condition')
+        logger.info(`[${count}] Wait for ${expectedValue}`);
+        return doWait(action, interval, expectedValue).then(() => {
+            logger.warning('Reached expected condition');
             return true;
-        }, () => {
+        }, reject => {
             if (maxCount <= count) {
-                logger.warning('Did not get expected result');
+                logger.warning(`Did not get expected result. Actual result is ${reject}`);
                 return false;
             } else {
-                return this.forTrue(action, maxCount, interval, count)
+                return this.forBoolCondition(action, maxCount, interval, expectedValue, count);
             }
         })
     }
+
+    forTrue(action, maxCount, interval) {
+        return this.forBoolCondition(action, maxCount, interval, true);
+    }
+
+    forFalse(action, maxCount, interval) {
+        return this.forBoolCondition(action, maxCount, interval, false);
+    }
 }
+
 module.exports = Wait;
