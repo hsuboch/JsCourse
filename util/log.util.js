@@ -1,14 +1,19 @@
+const LogWithTag = (tag, text) => {
+    console.log(`[${tag}] ${text} [${tag}]]`)
+}
+
 class Log {
+
     info(text) {
-        console.log(`[INFO] ${text} [INFO]`)
+        LogWithTag('INFO', text)
     }
 
-    warning(text) {
-        console.log(`[WARNING] ${text} [WARNING]`)
+    warning(text = 'Default warning') {
+        LogWithTag('WARNING', text)
     }
 
     error(text) {
-        console.log(`[ERROR] ${text} [ERROR]`)
+        LogWithTag('ERROR', text)
     }
 }
 
