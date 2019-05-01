@@ -6,6 +6,7 @@ const dateTimeUtil = require('../util/dateTime.util')
 describe('Hello world test suite', () => {
     it('should write "Hello World"', () => {
         logger.info('Hello World');
+        logger.warning();
     })
 })
 
