@@ -30,10 +30,10 @@ const retrierAwait = async (action, maxCount, interval, expectedValue, count = 0
     count++;
     logger.info(`[${count}] Wait for ${expectedValue}`);
     try {
-        doWait(action, interval, expectedValue);
+        await doWait(action, interval, expectedValue);
         logger.warning('Reached expected condition');
         return true;
-    } catch (actioResult) {
+    } catch (actionResult) {
         if (maxCount <= count) {
             logger.warning(`Did not get expected result. Actual result is ${reject}`);
             return false;
@@ -53,5 +53,4 @@ class Wait {
     }
 }
 
-new Wait().forTrue(()=> true, 5, 500);
 module.exports = Wait;

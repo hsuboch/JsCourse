@@ -1,3 +1,5 @@
+import {subDays} from 'date-fns';
+
 class DateTimeUtil {
     today() {
         return new Date();
@@ -10,6 +12,10 @@ class DateTimeUtil {
 
     daysDifference(dateLeft, dateRight) {
         return Math.round((dateRight.getTime() - dateLeft.getTime()) / (1000 * 60 * 60 * 24));
+    }
+
+    todayMinusTenDays() {
+        return subDays(this.today(), 10);
     }
 }
 

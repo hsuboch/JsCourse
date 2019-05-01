@@ -1,6 +1,5 @@
 const { describe, it } = require('mocha');
 const { assert } = require('chai');
-const logger = require('../util/log.util');
 const Wait = require('../util/wait.util');
 
 describe('Wait for true Test', () => {
@@ -9,9 +8,7 @@ describe('Wait for true Test', () => {
         const result = await wait.forTrue(() => true, 5, 1000);
         return assert.isTrue(result);
     });
-});
 
-describe('Wait for true Test', () => {
     it('should wait for true (false)', async () => {
         const wait = new Wait();
         const result = await wait.forTrue(() => false, 5, 1000);
@@ -25,9 +22,7 @@ describe('Wait for false Test', () => {
         const result = await wait.forFalse(() => false, 5, 1000);
         return assert.isTrue(result);
     });
-});
 
-describe('Wait for false Test', () => {
     it('should wait for false (true)', async () => {
         const wait = new Wait();
         const result = await wait.forFalse(() => true, 5, 1000);
@@ -42,7 +37,7 @@ describe('Wait for multiple false Test', () => {
             wait.forFalse(() => true, 5, 1000),
             wait.forFalse(() => false, 5, 1000),
         ]);
-        assert.isTrue(results[0]);
-        assert.isFalse(results[1]);
+        assert.isFalse(results[0]);
+        assert.isTrue(results[1]);
     });
 });
