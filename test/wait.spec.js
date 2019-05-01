@@ -1,32 +1,48 @@
-const { describe, it } = require('mocha')
+const { describe, it } = require('mocha');
 const { assert } = require('chai');
-const logger = require('../util/log.util')
-const Wait = require('../util/wait.util')
+const logger = require('../util/log.util');
+const Wait = require('../util/wait.util');
 
 describe('Wait for true Test', () => {
-    it('should wait for true', () => {
+    it('should wait for true', async () => {
         const wait = new Wait();
-        return wait.forTrue(() => true, 5, 1000).then((result) => assert.isTrue(result));
-    })
-})
+        const result = await wait.forTrue(() => true, 5, 1000);
+        return assert.isTrue(result);
+    });
+});
 
 describe('Wait for true Test', () => {
-    it('should wait for true (false)', () => {
+    it('should wait for true (false)', async () => {
         const wait = new Wait();
-        return wait.forTrue(() => false, 5, 1000).then((result) => assert.isFalse(result));
-    })
-})
+        const result = await wait.forTrue(() => false, 5, 1000);
+        return assert.isFalse(result);
+    });
+});
 
 describe('Wait for false Test', () => {
-    it('should wait for false', () => {
+    it('should wait for false', async () => {
         const wait = new Wait();
-        return wait.forFalse(() => false, 5, 1000).then((result) => assert.isTrue(result));
-    })
-})
+        const result = await wait.forFalse(() => false, 5, 1000);
+        return assert.isTrue(result);
+    });
+});
 
 describe('Wait for false Test', () => {
-    it('should wait for false (true)', () => {
+    it('should wait for false (true)', async () => {
         const wait = new Wait();
-        return wait.forFalse(() => true, 5, 1000).then((result) => assert.isFalse(result));
-    })
-})
+        const result = await wait.forFalse(() => true, 5, 1000);
+        return assert.isFalse(result);
+    });
+});
+
+describe('Wait for multiple false Test', () => {
+    it('should wait for  multiple false (true)', async () => {
+        const wait = new Wait();
+        const results = await Promise.all([
+            wait.forFalse(() => true, 5, 1000),
+            wait.forFalse(() => false, 5, 1000),
+        ]);
+        assert.isTrue(results[0]);
+        assert.isFalse(results[1]);
+    });
+});

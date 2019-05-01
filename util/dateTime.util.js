@@ -4,7 +4,7 @@ class DateTimeUtil {
     }
 
     setYear(date, year) {
-        date.setFullYear(year)
+        date.setFullYear(year);
         return date;
     }
 

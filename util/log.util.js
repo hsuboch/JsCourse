@@ -1,19 +1,19 @@
 const LogWithTag = (tag, text) => {
-    console.log(`[${tag}] ${text} [${tag}]]`)
-}
+    console.log(`[${tag}] ${text} [${tag}]]`);
+};
 
 class Log {
 
     info(text) {
-        LogWithTag('INFO', text)
+        LogWithTag('INFO', text);
     }
 
     warning(text = 'Default warning') {
-        LogWithTag('WARNING', text)
+        LogWithTag('WARNING', text);
     }
 
     error(text) {
-        LogWithTag('ERROR', text)
+        LogWithTag('ERROR', text);
     }
 }
 
