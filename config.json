@@ -1,0 +1,6 @@
+{
+    "startUrl": "https://www.google.com",
+    "imiplicityWait": 10000,
+    "scriptExecuting": 20000,
+    "pageLoading": 60000
+}
