@@ -35,6 +35,14 @@ class Browser {
             logger.warning(`cannot find element with name ${name}: ${error}`)
         }
     }
+    
+    async findElements(by, name) {
+        try {
+            return this.driver.findElements(by);
+        } catch (error) {
+            logger.warning(`cannot find element with name ${name}: ${error}`)
+        }
+    }
 }
 
 module.exports = Browser;

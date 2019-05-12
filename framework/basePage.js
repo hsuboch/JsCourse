@@ -1,6 +1,7 @@
 class BasePage{
-    constructor(browser) {
+    constructor(browser, locator) {
         this.browser = browser;
+        this.locator = locator;
     }
 }
 
