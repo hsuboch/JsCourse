@@ -1,5 +1,5 @@
 const LogWithTag = (tag, text) => {
-    console.log(`[${tag}] ${text} [${tag}]]`);
+    console.log(`[${tag}] ${text} [${tag}]`);
 };
 
 class Log {
