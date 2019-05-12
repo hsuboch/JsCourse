@@ -1,6 +1,8 @@
 {
     "startUrl": "https://www.google.com",
-    "imiplicityWait": 10000,
-    "scriptExecuting": 20000,
-    "pageLoading": 60000
+    "timeouts":{
+        "implicit": 3000,
+        "pageLoad": 30000,
+        "script": 15000
+    }
 }

@@ -9,16 +9,18 @@ class Browser {
     }
 
     async start() {
-        const capabilities = Capabilities.chrome();
-        capabilities.set('chromeoptions', {
+                const capabilities = Capabilities.chrome();
+        capabilities.set('chromeOptions', {
             'args': ['--disable-plugins']
         })
+
         this.driver = await new Builder().forBrowser('chrome').withCapabilities(capabilities).build();
         try {
-            browser.get(config.startURL);
-            logger.info('Browser is started');
+            await this.driver.get(config.startUrl);
+            await this.driver.manage().setTimeouts(config.timeouts)
+            logger.info(`Browser is started`)
         } catch (error) {
-
+            logger.error(`Cannot start browser: ${error}`)
         }
     }
 
@@ -26,7 +28,7 @@ class Browser {
         await this.driver.quit();
     }
 
-    async findeElement(by, name) {
+    async findElement(by, name) {
         try {
             return this.driver.findElement(by);
         } catch (error) {
