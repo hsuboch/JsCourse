@@ -7,8 +7,9 @@ class ResultsPage extends BasePage {
     }
 
     async getCountOfResults() {
-        var text = await this.browser.findElement(locators.resultsCount, 'Search input');
-        return text.getText().replace(' ', '').search('');
+        var results = await this.browser.findElement(locators.resultsCount, 'Search input');
+        var countOfResults = await results.getText();
+        return countOfResults.split(' ').join('').match('\\d+')[0];
     }
 
     async getResultsLinks() {
