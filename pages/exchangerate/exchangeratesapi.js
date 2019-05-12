@@ -1,5 +1,6 @@
 var chai = require('chai'), chaiHttp = require('chai-http');
 chai.use(chaiHttp);
+const dateTimeUtil = require('..');
 
 const get = (server, url) => {
     return new Promise((resolve) => {
@@ -19,8 +20,8 @@ const gerResponseAwait = async (server, url) => {
 };
 
 class ExchangeRatesApi {
-    getRates(date = null) {
-        return gerResponseAwait('https://api.exchangeratesapi.io', date == null ? '/latest' : `/${date}`);
+    getRates(currency, date = null) {
+        return gerResponseAwait('https://api.exchangeratesapi.io', (date == null ? `/${dateTimeUtil.get}` : `/${date}`)+`?base=${currency}`);
     }
 }
 

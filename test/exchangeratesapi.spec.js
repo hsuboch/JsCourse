@@ -5,7 +5,7 @@ const logger = require('../util/log.util');
 
 describe('Get latest rates', () => {
     it('should get latest currency rates', async () => {
-        const result = await api.getRates();
+        const result = await api.getRates('USD');
         logger.info(result.toString());
     });
 });
