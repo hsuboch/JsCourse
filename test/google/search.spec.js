@@ -6,24 +6,24 @@ const {assert} = require('chai');
 
 describe('Google Search', () => {
     let browser;
+    let homePage;
     let resultsPage;
 
     before(async () => {
         browser = new Browser();
         await browser.start();
+        homePage = new HomePage(browser);
+        resultsPage = new ResultsPage(browser);
     });
 
     it('should search for "webdriver"', async () => {
-        const homePage = new HomePage(browser);
         await homePage.isOpened().then((result) => assert.isTrue(result));
         await homePage.search('webdriver');
-        resultsPage = new ResultsPage(browser);
         await resultsPage.isOpened().then((result) => assert.isTrue(result));
     });
 
     it('should should find more than 10000 results', async () => {
-        resultsPage = new ResultsPage(browser);
-        var resultsCount = await resultsPage.getCountOfResults();
+        const resultsCount = await resultsPage.getCountOfResults();
         assert.isTrue(parseInt(resultsCount, 10) > 10000);
     });
 
