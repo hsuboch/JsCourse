@@ -1,4 +1,4 @@
-import {subDays} from 'date-fns';
+const {subDays} = require('date-fns');
 
 class DateTimeUtil {
     today() {
