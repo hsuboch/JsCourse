@@ -29,19 +29,15 @@ class Browser {
     }
 
     async findElement(by, name) {
-        try {
-            return this.driver.findElement(by);
-        } catch (error) {
-            logger.warning(`cannot find element with name ${name}: ${error}`)
-        }
+        return this.driver.findElement(by).catch((error) => {
+            logger.warning(`Cannot find element ${error}: ${name}`)
+        });
     }
-    
+
     async findElements(by, name) {
-        try {
-            return this.driver.findElements(by);
-        } catch (error) {
-            logger.warning(`cannot find element with name ${name}: ${error}`)
-        }
+        return this.driver.findElements(by).catch((error) => {
+            logger.warning(`Cannot find element ${error}: ${name}`)
+        });
     }
 }
 
