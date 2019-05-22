@@ -1,0 +1,13 @@
+{
+  "name": "protractor-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "webdriver:update": "webdriver-manager update",
+    "webdriver:start": "npm run webdriver:update && webdriver-manager start",
+    "test": "protractor config.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
